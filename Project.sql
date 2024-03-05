@@ -2,7 +2,7 @@
 
 select location,date,total_cases,new_cases,total_deaths,population
 from Portfolio_101..[owid-covid-data]
-wherE NULLIF(continent, '') IS NOT NULL 
+where NULLIF(continent, '') IS NOT NULL 
 order by location, date;
 
 
