@@ -17,9 +17,8 @@ Group by location
 --Total new Cases on particular date
 SELECT Date, SUM(CAST(new_cases AS INT)) AS TotalNewCases
 FROM Portfolio_101..[owid-covid-data]
-WHERE date = '2021-01-01'
+WHERE date = '01-06-2021'
 GROUP BY Date;
-
 
 -- Total cases vs Total Death
 Select location, date,total_cases,total_deaths, (CAST(total_deaths AS FLOAT) / NULLIF(CAST(total_cases AS FLOAT), 0)) * 100 AS death_percentage
