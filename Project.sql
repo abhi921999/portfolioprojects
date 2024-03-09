@@ -8,6 +8,12 @@ order by location, date;
 --total number of COVID-19 tests conducted by each country
 Select location,Sum(Cast(total_tests as bigint)) from Portfolio_101..Covid_Vaccination where NULLIF(continent, '') IS NOT NULL  group by location
 
+ --First Case Per Country
+Select Location, Min(Date)
+from Portfolio_101..[owid-covid-data]  
+where NULLIF(continent, '') IS NOT NULL and total_cases >0 
+Group by location
+
 -- Total cases vs Total Death
 Select location, date,total_cases,total_deaths, (CAST(total_deaths AS FLOAT) / NULLIF(CAST(total_cases AS FLOAT), 0)) * 100 AS death_percentage
 from Portfolio_101..[owid-covid-data]
