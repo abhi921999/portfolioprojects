@@ -25,6 +25,13 @@ Select Count(Distinct( location)) as count_of_Countries
 FROM Portfolio_101..[owid-covid-data] 
 where Cast(total_deaths as int)>10000 and NULLIF(continent, '') IS NOT NULL
 
+ --To find highest cases in last 30 days
+SELECT TOP 5 location, SUM(CAST(new_cases AS INT)) AS HighestNewCases
+FROM Portfolio_101..[owid-covid-data]
+WHERE CONVERT(DATETIME, date, 105) >= DATEADD(day, -30, GETDATE()) and NULLIF(continent, '') IS NOT NULL
+GROUP BY location
+ORDER BY HighestNewCases DESC;
+
 -- Total cases vs Total Death
 Select location, date,total_cases,total_deaths, (CAST(total_deaths AS FLOAT) / NULLIF(CAST(total_cases AS FLOAT), 0)) * 100 AS death_percentage
 from Portfolio_101..[owid-covid-data]
