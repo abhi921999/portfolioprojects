@@ -32,6 +32,17 @@ WHERE CONVERT(DATETIME, date, 105) >= DATEADD(day, -30, GETDATE()) and NULLIF(co
 GROUP BY location
 ORDER BY HighestNewCases DESC;
 
+-- to check percantage of population vaccinated
+SELECT d.location, MAX(d.population) AS Population, MAX(c.total_vaccinations) AS TotalVaccinations, (CAST(MAX(c.total_vaccinations) AS FLOAT) / NULLIF(CAST(MAX(d.population) AS FLOAT), 0)) * 100 AS VaccinationPercentage
+from Portfolio_101..[owid-covid-data] d
+Join Portfolio_101..Covid_Vaccination c
+ON d.location = c.location
+and d.date=c.date
+where NULLIF(d.continent, '') IS NOT NULL 
+Group by d.location
+order by location, population;
+
+
 -- Total cases vs Total Death
 Select location, date,total_cases,total_deaths, (CAST(total_deaths AS FLOAT) / NULLIF(CAST(total_cases AS FLOAT), 0)) * 100 AS death_percentage
 from Portfolio_101..[owid-covid-data]
