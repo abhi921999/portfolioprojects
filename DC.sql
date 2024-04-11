@@ -81,3 +81,12 @@ from [Project_22].[dbo].[Nashville Housing Data for Data Cleaning] )
 --deleting duplicate
 Delete from ROWNUMCTE where  row_num>1;
 
+
+--removing  unnecessary columns not a valid practice to do with raw data just for demonstration purpose
+Alter table [Project_22].[dbo].[Nashville Housing Data for Data Cleaning] 
+drop column OwnerAddress,PropertyAddress,TaxDistrict
+
+Select * from [Project_22].[dbo].[Nashville Housing Data for Data Cleaning] ;
+
+Alter table [Project_22].[dbo].[Nashville Housing Data for Data Cleaning] 
+drop column SaleDate
